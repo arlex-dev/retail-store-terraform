@@ -5,9 +5,6 @@ This project provisions the complete AWS infrastructure for the retail store
 microservices application using Terraform. One terraform apply command creates
 the entire infrastructure and automatically deploys the application.
 
-## Live Demo
-- **AWS EC2:** http://54.165.53.188:8888
-
 ## Remote State Management
 
 | Resource | Purpose |
@@ -41,19 +38,21 @@ user_data.sh    - Auto-installs Docker and deploys app
 
 ## Outputs After Apply
 
-instance_id       = i-0d3537f2a381c2318
-public_ip         = 54.165.53.188
-retail_store_url  = http://54.165.53.188:8888
-ssh_command       = ssh -i ~/.ssh/jenkins-key.pem ubuntu@54.165.53.188
-vpc_id            = vpc-06a05bc390b6d7c43
-security_group_id = sg-027730646c4c6aed6
+After running terraform apply you will see:
+
+instance_id       = <EC2 instance ID>
+public_ip         = <EC2 public IP>
+retail_store_url  = http://\<public_ip\>:8888
+ssh_command       = ssh -i ~/.ssh/<key-name>.pem ubuntu@<public_ip>
+vpc_id            = <VPC ID>
+security_group_id = <Security Group ID>
 
 ## How to Use
 
 Prerequisites:
 - Terraform >= 1.0
 - AWS CLI configured
-- AWS key pair named jenkins-key
+- AWS key pair created
 
 Step 1 - Clone the repo:
     git clone https://github.com/arlex-dev/retail-store-terraform.git
@@ -76,7 +75,7 @@ Step 4 - Deploy full infrastructure:
     terraform apply
 
 Step 5 - Access the app after 10 minutes:
-    http://PUBLIC_IP:8888
+    http://\<public_ip\>:8888
 
 ## Destroy
     terraform destroy
